@@ -1,0 +1,29 @@
+#titlle{
+    font-weight: bold;
+    border: 5px;
+}
+.containerUp{
+    position: fixed;
+    top: 150px;
+    left: 0px;
+    right: 0;
+    height: 50px;
+    background-color: #00008b;
+}
+.mainPicture{
+    position: fixed;
+    left: 25px;
+    top: 25px;
+}
+.containerDown{
+    postiont: fixed;
+    top: 45px;
+    height: 10px;
+    background-color: darkblue;
+}
+.footer{
+    position: fixed;
+    bottom: 25px;
+}
+
+
