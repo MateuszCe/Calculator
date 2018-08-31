@@ -8,16 +8,33 @@ public class Calculator {
 
     Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    private boolean isOperator(String element) {
+        if (element.equals("+")) {
+            return true;
+        } else if (element.equals("-")) {
+            return true;
+        } else if (element.equals("*")) {
+            return true;
+        } else if (element.equals("/")) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public static void main(String[] args) throws Exception{
         Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
         Calculations calculations = new Calculations() {
-            //            nie wiem czy ta implementacja jest odpowiednia????
+
             @Override
             public double compute(double numberA, double numberB) {
                 return 0;
             }
         };
+
+
         while (true) {
             System.out.println("Wybierz operacje: \n" +
                     "-dodawanie: + \n" +
@@ -25,6 +42,7 @@ public class Calculator {
                     "-odejmowanie: - \n" +
                     "-dzielenie: /");
 //            z tymi ifami cos dziwnego sie dzieje nie zawsze wylapuje operacje np dopiero jak sie poda + za 2 razem to wylapuje do sprawdznia...
+
             if (calculator.doAddition()) {
                 calculations = new Addition();
             } else if (calculator.doSubstraction()) {
@@ -37,6 +55,7 @@ public class Calculator {
             double value1 = calculator.getValue();
             double value2 = calculator.getValue();
             double result = calculations.compute(value1, value2);
+//            double result = calculations.compute(calculator.getValue(value1,value2));
             System.out.println("Wynik: " + result);
             System.out.println("Zakonczyc prace kalkulatora? Y/N");
             String switchoff = scanner.next();
@@ -46,24 +65,35 @@ public class Calculator {
         }
     }
 
-    private boolean doAddition() {
-        return scanner.next().equals("+");
+    private boolean doAddition() throws Exception {
+            return scanner.next().equals("+");
     }
 
-    private boolean doSubstraction() {
+    private boolean doSubstraction() throws Exception {
         return scanner.next().equals("-");
     }
 
-    private boolean doMullticipation() {
+    private boolean doMullticipation()throws Exception {
         return scanner.next().equals("*");
     }
 
-    private boolean doDivision() {
+    private boolean doDivision() throws Exception {
         return scanner.next().equals("/");
     }
 
-    private double getValue() {
+//    ten wyjatek wyrzuca sie w petli analogicznie chcialem do powyzszych metod zrobic
+    private double getValue() throws  Exception{
+        try{
         System.out.println("Podaj liczbe: ");
+        return scanner.nextDouble();
+        }
+        catch (NumberFormatException e){
+            e.printStackTrace();
+            System.out.println("Nie podales liczby");
+        }
+        finally {
+            getValue();
+        }
         return scanner.nextDouble();
     }
 }
